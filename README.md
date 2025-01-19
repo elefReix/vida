@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ruby
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.3.
@@ -25,3 +26,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+=======
+# vida
+Este es mi proyecto de vida con Katiana Corrales Garibay ultimo intento
+>>>>>>> b1239e7257a2a0968c0f2c2098e1eb845a281187
