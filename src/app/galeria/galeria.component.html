@@ -1,0 +1,26 @@
+<!-- Filtro de categoría -->
+<div class="filtro">
+  <label>Filtrar por categoría:</label>
+  <select [(ngModel)]="categoriaSeleccionada">
+    <option value="">Todas</option>
+    <option *ngFor="let c of categorias" [value]="c">{{ c }}</option>
+  </select>
+</div>
+
+<!-- Formulario para subir imagen -->
+<div class="formulario-subida">
+  <input type="file" (change)="onFileSelected($event)" />
+  <input type="text" [(ngModel)]="nuevaDescripcion" placeholder="Descripción" />
+  <select [(ngModel)]="nuevaCategoria">
+    <option *ngFor="let c of categorias" [value]="c">{{ c }}</option>
+  </select>
+  <button (click)="agregarImagen()">Agregar imagen</button>
+</div>
+
+<!-- Galería -->
+<div class="gallery">
+  <div class="photo" *ngFor="let foto of fotosFiltradas()">
+    <img [src]="foto.url" [alt]="foto.descripcion" />
+    <p>{{ foto.descripcion }} ({{ foto.categoria }})</p>
+  </div>
+</div>

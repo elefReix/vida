@@ -1,0 +1,9 @@
+[
+  { "url": "assets/fotos/1.webp", "descripcion": "Cumpleaños", "categoria": "cumpleaños" },
+  { "url": "assets/fotos/2.jpeg", "descripcion": "Decoración", "categoria": "eventos" },
+  { "url": "assets/fotos/3.jpeg", "descripcion": "Decoración", "categoria": "eventos" },
+  { "url": "assets/fotos/4.jpg", "descripcion": "Decoración", "categoria": "eventos" },
+  { "url": "assets/fotos/5.jpg", "descripcion": "Decoración", "categoria": "eventos" },
+  { "url": "assets/fotos/6.jpg", "descripcion": "Decoración", "categoria": "eventos" },
+  { "url": "assets/fotos/7.png", "descripcion": "Decoración", "categoria": "eventos" }
+]
