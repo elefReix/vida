@@ -1,4 +1,15 @@
+<div class="star-wars-wrapper">
+  <div class="star-wars-content">
+        <div *ngFor="let mensaje of mensajesCumple" class="frase-item">
+    <strong>{{ mensaje }}</strong> 
+  </div>
+  </div>
+</div>
+
+
+
 <app-galeria></app-galeria>
+<app-fondo-animado></app-fondo-animado>
 
 <!-- Tu contenido principal aquí -->
 <router-outlet></router-outlet>

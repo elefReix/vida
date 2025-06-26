@@ -20,19 +20,24 @@
 <!-- Galería -->
 <!-- Carrusel de fotos -->
 <!-- Carrusel con controles -->
-<div class="carousel">
+<div class="carousel-wrapper">
   <div class="carousel-container">
+    <button class="nav prev" (click)="retroceder()">❮</button>
     <img
-      *ngIf="fotosFiltradas().length"
+      class="carousel-image marco-canon"
       [src]="fotosFiltradas()[indiceActual].url"
       [alt]="fotosFiltradas()[indiceActual].descripcion"
-      class="carousel-image fade-in"
     />
-    <button class="prev" (click)="retroceder()">❮</button>
-    <button class="next" (click)="avanzar()">❯</button>
+    <button class="nav next" (click)="avanzar()">❯</button>
   </div>
-  <p class="descripcion">
-    Registrada el :{{ fotosFiltradas()[indiceActual].fecha }}
-  </p>
+  <!-- <div class="info">
+    <p class="descripcion">
+      {{ fotosFiltradas()[indiceActual].descripcion }}
+    </p>
+    <p class="fecha">
+      Registrada el: {{ fotosFiltradas()[indiceActual].fecha }}
+    </p>
+  </div> -->
 </div>
+
 
