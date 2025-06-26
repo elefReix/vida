@@ -1,0 +1,38 @@
+<!-- Filtro de categoría -->
+<!-- <div class="filtro">
+  <label>Filtrar por categoría:</label>
+  <select [(ngModel)]="categoriaSeleccionada">
+    <option value="">Todas</option>
+    <option *ngFor="let c of categorias" [value]="c">{{ c }}</option>
+  </select>
+</div> -->
+
+<!-- Formulario para subir imagen -->
+<!-- <div class="formulario-subida">
+  <input type="file" (change)="onFileSelected($event)" />
+  <input type="text" [(ngModel)]="nuevaDescripcion" placeholder="Descripción" />
+  <select [(ngModel)]="nuevaCategoria">
+    <option *ngFor="let c of categorias" [value]="c">{{ c }}</option>
+  </select>
+  <button (click)="agregarImagen()">Agregar imagen</button>
+</div> -->
+
+<!-- Galería -->
+<!-- Carrusel de fotos -->
+<!-- Carrusel con controles -->
+<div class="carousel">
+  <div class="carousel-container">
+    <img
+      *ngIf="fotosFiltradas().length"
+      [src]="fotosFiltradas()[indiceActual].url"
+      [alt]="fotosFiltradas()[indiceActual].descripcion"
+      class="carousel-image fade-in"
+    />
+    <button class="prev" (click)="retroceder()">❮</button>
+    <button class="next" (click)="avanzar()">❯</button>
+  </div>
+  <p class="descripcion">
+    Registrada el :{{ fotosFiltradas()[indiceActual].fecha }}
+  </p>
+</div>
+
