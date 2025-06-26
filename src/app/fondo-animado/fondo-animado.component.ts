@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-fondo-animado',
@@ -10,41 +10,56 @@ import { AfterViewInit, Component } from '@angular/core';
 })
 export class FondoAnimadoComponent implements AfterViewInit{
 
-   ngAfterViewInit() {
-    const canvas = document.getElementById('fondo-estrellas') as HTMLCanvasElement;
-  const ctx = canvas.getContext('2d');
+  @ViewChild('bgCanvas', { static: true }) canvasRef!: ElementRef<HTMLCanvasElement>;
 
-  if (!ctx) return; // <- 👈 Solución al error
+  ngAfterViewInit() {
+    const canvas = this.canvasRef.nativeElement;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+    let w: number, h: number;
+    const resize = () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    };
 
-  const estrellas = Array.from({ length: 100 }).map(() => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 1.5 + 0.5
-  }));
+    window.addEventListener('resize', resize);
+    resize();
 
-  function animar() {
-    if (ctx) {
-      console.log('todo bien');
-      
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      estrellas.forEach(e => {
-        ctx.beginPath();
-        ctx.arc(e.x, e.y, e.r, 0, 2 * Math.PI);
-        ctx.fillStyle = '#ffffff22';
-        ctx.fill();
-        e.y -= 0.3;
-        if (e.y < 0) e.y = canvas.height;
+    const stars = Array.from({ length: 100 }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      z: Math.random() * w,
+    }));
+
+    const draw = () => {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.fillStyle = '#fff';
+      stars.forEach(star => {
+        star.z -= 2;
+        if (star.z <= 0) {
+          star.x = Math.random() * w;
+          star.y = Math.random() * h;
+          star.z = w;
+        }
+
+        const k = 128.0 / star.z;
+        const px = star.x * k + w / 2;
+        const py = star.y * k + h / 2;
+
+        if (px >= 0 && px < w && py >= 0 && py < h) {
+          const size = (1 - star.z / w) * 2;
+          ctx.beginPath();
+          ctx.arc(px, py, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
       });
-    }else{
-      console.log(ctx);
-      
-    }
-    requestAnimationFrame(animar);
-  }
 
-  animar();
+      requestAnimationFrame(draw);
+    };
+
+    draw();
   }
 }
