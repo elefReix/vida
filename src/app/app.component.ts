@@ -1,16 +1,67 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FooterComponent } from './footer/footer.component';
 import { GaleriaComponent } from './galeria/galeria.component';
 import { FormsModule } from '@angular/forms';
+import { FondoAnimadoComponent } from './fondo-animado/fondo-animado.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,FooterComponent,GaleriaComponent,FormsModule],
+  imports: [RouterOutlet,CommonModule,FondoAnimadoComponent,GaleriaComponent,FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'R';
+export class AppComponent implements OnInit {
+  
+mensajesCumple = [
+  '🎂 ¡Feliz cumpleaños, Mi Amor! 🎈',
+  "Español: Te amo",
+  "Inglés: I love you",
+  "Francés: Je t'aime",
+  "Alemán: Ich liebe dich",
+  "Italiano: Ti amo",
+  "Portugués: Eu te amo",
+  "Ruso: Я тебя люблю",
+  "Chino (mandarín): 我爱你",
+  "Japonés: 愛してる",
+  "Coreano: 사랑해",
+  "Árabe: أحبك",
+  "Hindi: मैं तुमसे प्यार करता हूँ",
+  "Griego: Σ' αγαπώ",
+  "Turco: Seni seviyorum",
+  "Hebreo (hombre): אני אוהב אותך",
+  "Hebreo (mujer): אני אוהבת אותך",
+  "Polaco: Kocham cię",
+  "Sueco: Jag älskar dig",
+  "Húngaro: Szeretlek",
+  "Rumano: Te iubesc",
+  "Filipino: Mahal kita" ,
+];
+
+mensajeVisible = '';
+mensajeActual = 0;
+letra = 0;
+
+  ngOnInit(): void {
+    this.mostrarMensaje()
+  }
+  mostrarMensaje() {
+  const mensaje = this.mensajesCumple[this.mensajeActual];
+  this.mensajeVisible = '';
+
+  const escribir = setInterval(() => {
+    if (this.letra < mensaje.length) {
+      this.mensajeVisible += mensaje[this.letra];
+      this.letra++;
+    } else {
+      clearInterval(escribir);
+      setTimeout(() => {
+        this.mensajeActual = (this.mensajeActual + 1) % this.mensajesCumple.length;
+        this.letra = 0;
+        this.mostrarMensaje();
+      }, 2500); // espera antes del siguiente mensaje
+    }
+  }, 60); // velocidad por letra
+}
 }
