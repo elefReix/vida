@@ -16,17 +16,41 @@ export class GaleriaComponent implements OnInit{
    categorias = ['cumpleaños', 'eventos', 'otros'];
    categoriaSeleccionada = '';
    nuevaDescripcion = '';
+   fecha='';
    nuevaCategoria = 'cumpleaños';
    archivoSeleccionado: any = null;
+   indiceActual:number = 0
    
    constructor(private galeriaService: GaleriaService) {}
 
   ngOnInit() {
       this.galeriaService.obtenerFotos().subscribe(data => {
-        this.fotos = data;
+        try {
+          this.fotos = data;
+          this.iniciarCarrousel()
+        } catch (error) {
+          console.error("🚀 error", error);
+        }
       });
   }
  
+  iniciarCarrousel(){
+    setInterval(()=>{
+      const total = this.fotosFiltradas().length
+      console.error("🚀 total", total);
+      if(this.fotosFiltradas().length){
+        this.indiceActual = (this.indiceActual +1) % total 
+      }
+    },2000)
+  }
+
+  avanzar(){
+
+  }
+
+  retroceder(){
+
+  }
 
   onFileSelected(event: any) {
     const archivo = event.target.files[0];
@@ -44,7 +68,8 @@ export class GaleriaComponent implements OnInit{
       this.fotos.push({
         url: this.archivoSeleccionado,
         descripcion: this.nuevaDescripcion,
-        categoria: this.nuevaCategoria
+        categoria: this.nuevaCategoria,
+        fecha:this.fecha
       });
 
       // Reset form

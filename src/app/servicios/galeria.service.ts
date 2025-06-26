@@ -6,14 +6,16 @@ export interface Foto {
   url: string;
   descripcion: string;
   categoria: string;
+  fecha:string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class GaleriaService {
-private jsonUrl = 'assets/fotos/lista.json';
-  constructor(private http:HttpClient) { }
+
+  private jsonUrl = 'assets/fotos/lista.json';
+  constructor(private http: HttpClient) { }
   obtenerFotos(): Observable<Foto[]> {
     return this.http.get<Foto[]>(this.jsonUrl);
   }
