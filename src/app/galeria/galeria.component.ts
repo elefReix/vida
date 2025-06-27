@@ -12,6 +12,9 @@ import { Foto, GaleriaService } from '../servicios/galeria.service';
 })
 export class GaleriaComponent implements OnInit{
 
+  isPaused = false;
+  intervalo: any;
+
    fotos: Foto[] = [];
    categorias = ['cumpleaños', 'eventos', 'otros'];
    categoriaSeleccionada = '';
@@ -37,19 +40,26 @@ export class GaleriaComponent implements OnInit{
   iniciarCarrousel(){
     setInterval(()=>{
       const total = this.fotosFiltradas().length
-      console.error("🚀 total", total);
-      if(this.fotosFiltradas().length){
-        this.indiceActual = (this.indiceActual +1) % total 
+      if (!this.isPaused) {
+        if(this.fotosFiltradas().length){
+          this.indiceActual = (this.indiceActual +1) % total 
+        }
       }
-    },2000)
+    },5000)
   }
 
-  avanzar(){
-
+  togglePause() {
+    this.isPaused = !this.isPaused;
   }
 
-  retroceder(){
+  // Asegúrate de limpiar el interval al destruir
+  ngOnDestroy() {
+    clearInterval(this.intervalo);
+  }
 
+  siguiente() {
+    // tu lógica de avance de índice
+    this.indiceActual = (this.indiceActual + 1) % this.fotosFiltradas().length;
   }
 
   onFileSelected(event: any) {
