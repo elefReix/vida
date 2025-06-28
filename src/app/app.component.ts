@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { GaleriaComponent } from './galeria/galeria.component';
 import { FormsModule } from '@angular/forms';
-import { FondoAnimadoComponent } from './fondo-animado/fondo-animado.component';
 import { CommonModule } from '@angular/common';
+import { CarouselComponent } from './carousel/carousel.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,FondoAnimadoComponent,GaleriaComponent,FormsModule],
+  imports: [RouterOutlet,CommonModule,CarouselComponent,FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
