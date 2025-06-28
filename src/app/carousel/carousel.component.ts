@@ -39,12 +39,9 @@ export class CarouselComponent {
   getPhotos(){
     this.galeriaService.obtenerFotos().subscribe(data => {
         try {
-          console.log(data);
-          this.teamMembers = data.map( (foto:any) => ({ id:foto.descripcion, src:foto.url, alt:foto.categoria, name: foto.descripcion, title: foto.descripcion }))
+          this.teamMembers = data.map( (foto:any) => ({ id:foto.url, src:foto.url, alt:foto.categoria, name: foto.descripcion, title: foto.categoria }))
           this.startAutoplay()
           console.log("🚀 ~ CarouselComponent ~ this.galeriaService.obtenerFotos ~ fotos:", this.teamMembers)
-          // this.fotos = data;
-          // this.iniciarCarrousel()
         } catch (error) {
           console.error("🚀 error", error);
         }
