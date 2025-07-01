@@ -34,6 +34,9 @@ export class CarouselComponent {
 
   ngOnDestroy(): void {
     this.pauseAutoplay()
+    if (this.autoplayInterval) {
+    clearTimeout(this.autoplayInterval);
+  }
   }
 
   getPhotos(){
@@ -66,12 +69,26 @@ export class CarouselComponent {
   handlePrev(): void {
     this.isPaused = true
     this.currentIndex = (this.currentIndex - 1 + this.teamMembers.length) % this.teamMembers.length
+  this.scheduleAutoplayResume();
   }
 
   handleNext(): void {
     this.isPaused = true
     this.currentIndex = (this.currentIndex + 1) % this.teamMembers.length
+  this.scheduleAutoplayResume();
   }
+
+  scheduleAutoplayResume() {
+  if (this.autoplayInterval) {
+    clearTimeout(this.autoplayInterval);
+  }
+
+  this.autoplayInterval = setTimeout(() => {
+    this.isPaused = false;
+    this.startAutoplay();
+  }, 5000);
+}
+
 
   getImageStyles(index: number): { class: string; style: any } {
     const offset = (index - this.currentIndex + this.teamMembers.length) % this.teamMembers.length
