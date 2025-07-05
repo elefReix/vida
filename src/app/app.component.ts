@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CarouselComponent } from './carousel/carousel.component';
+import { NavigationComponent } from "./navigation/navigation.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,CarouselComponent,FormsModule],
+  imports: [RouterOutlet, CommonModule, FormsModule, NavigationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
