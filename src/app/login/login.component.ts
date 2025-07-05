@@ -1,39 +1,42 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { LoginService } from '../servicios/login.service';
+import {  } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ 
     CommonModule, 
-    FormsModule,
+    FormsModule,ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  email = '';
-  password = '';
-  error: string | null = null;
-  message:String = ''
+  form: FormGroup;
+  message = signal('');
 
-  constructor(private authService: LoginService) {
-    this.login()
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
   }
 
-  login() {
-    this.authService.login(this.email, this.password)
-      .then(() => {
-        this.error = null;
-        this.message =  'Login exitosos';
-        console.log('✅ Login exitoso');
-        // Redirige o actualiza vista
-      })
-      .catch((err) => {
-        this.error = err.message;
-        console.log("🚀 ~ LoginComponent ~ login ~ this.error:", this.error)
-      });
+  onSubmit(): void {
+    this.message.set('');
+
+    const { email, password } = this.form.value;
+    if (email === 'test@example.com' && password === 'password123') {
+      this.message.set('Inicio de sesión exitoso. ¡Bienvenido!');
+    } else {
+      this.message.set('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+    }
+  }
+
+  isSuccess(): boolean {
+    return this.message().includes('exitoso');
   }
 }

@@ -1,57 +1,58 @@
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 pt-20 pb-8">
-    <div class="w-full max-w-md mx-auto shadow-lg rounded-xl bg-white">
-      <div class="text-center px-8 pt-6 pb-2">
-        <h2 class="text-3xl font-bold text-gray-900">Iniciar Sesión</h2>
-        <p class="text-gray-600 text-sm">
-          Ingresa tus credenciales para acceder a tu cuenta.
-        </p>
-      </div>
-      <div class="px-8 pb-6">
-        <form (ngSubmit)="login()" class="space-y-6" #form="ngForm">
-          <div class="space-y-2">
-            <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-            <div class="relative">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                [(ngModel)]="email"
-                required
-                class="pl-10 w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="tu@ejemplo.com"
-              />
-            </div>
-          </div>
-          <div class="space-y-2">
-            <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-            <div class="relative">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                [(ngModel)]="password"
-                required
-                class="pl-10 w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="••••••••"
-              />
-            </div>
-          </div>
-          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Iniciar Sesión
-          </button>
+<div class="relative min-h-screen flex items-center justify-center bg-gray-950 overflow-hidden pt-20 pb-8">
+  <!-- Fondo animado futurista -->
+  <div class="absolute inset-0 z-0 opacity-70 animate-pulse bg-futuristic"></div>
 
-          <p *ngIf="message" [ngClass]="{
-            'text-green-600': message.includes('exitoso'),
-            'text-red-600': !message.includes('exitoso')
-          }" class="text-center text-sm">
-            {{ message }}
-          </p>
-
-          <div class="text-center text-sm text-gray-600">
-            ¿No tienes una cuenta?
-            <a href="#" class="text-blue-600 hover:underline">Regístrate</a>
-          </div>
-        </form>
-      </div>
+  <!-- Card -->
+  <div class="relative z-10 w-full max-w-md mx-auto bg-gray-800/70 border border-gray-700 shadow-2xl rounded-xl backdrop-blur-sm p-6">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-white">Acceso al Sistema</h2>
+      <p class="text-gray-300 mt-2">Ingresa tus credenciales para una experiencia inmersiva.</p>
     </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+      <div class="space-y-2">
+        <label for="email" class="text-gray-200 block">Correo Electrónico</label>
+        <div class="relative">
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="usuario@dominio.com"
+            required
+            class="pl-10 w-full bg-gray-700 border border-gray-600 text-white placeholder:text-gray-400 rounded-md py-2 focus:border-blue-500 focus:ring-blue-500"
+          />
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <label for="password" class="text-gray-200 block">Contraseña</label>
+        <div class="relative">
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="••••••••"
+            required
+            class="pl-10 w-full bg-gray-700 border border-gray-600 text-white placeholder:text-gray-400 rounded-md py-2 focus:border-blue-500 focus:ring-blue-500"
+          />
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition-colors duration-300"
+      >
+        Acceder
+      </button>
+
+      <p *ngIf="message()" class="text-center text-sm" [ngClass]="isSuccess() ? 'text-green-400' : 'text-red-400'">
+        {{ message() }}
+      </p>
+
+      <div class="text-center text-sm text-gray-400">
+        ¿No tienes una cuenta?
+        <a href="#" class="text-blue-400 hover:underline">Regístrate aquí</a>
+      </div>
+    </form>
   </div>
+</div>
